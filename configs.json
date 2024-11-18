@@ -1,0 +1,66 @@
+{
+     "devign": {
+        "learning_rate": 5e-6,
+        "weight_decay": 1.3e-6,
+        "loss_lambda": 1.3e-6,
+        "model": {
+            "gated_graph_conv_args": {
+                "out_channels": 200,
+                "num_layers": 6,
+                "aggr": "add",
+                "bias": true
+            },
+            "emb_size": 25
+        }
+     },
+     "create": {
+        "filter_column_value": {
+            "project": "qemu"
+        },
+        "slice_size": 100,
+        "joern_cli_dir": "joern/joern-cli/",
+        "data_size": -1
+     },
+     "paths": {
+        "cpg": "data/cpg/",
+        "joern": "data/joern/",
+        "raw": "data/raw/",
+        "input": "data/input/",
+        "model": "data/model/",
+        "tokens": "data/tokens/",
+        "w2v": "data/w2v/"
+     },
+     "files": {
+        "raw": "dataset.json",
+        "cpg": "cpg",
+        "tokens": "tokens.pkl",
+        "w2v": "w2v.model",
+        "input": "input.pkl",
+        "model": "checkpoint.pt"
+     },
+     "embed": {
+        "max_nodes": 205,
+        "word2vec_args": {
+            "size": 100,
+            "alpha": 0.01,
+            "window": 5,
+            "min_count": 3,
+            "sample": 1e-5,
+            "workers": 4,
+            "sg": 1,
+            "hs": 0,
+            "negative": 5
+        },
+        "edge_type": ["Ast", "Cfg", "Dfg"]
+     },
+     "process": {
+        "use_gpu": true,
+        "epochs": 100,
+        "patience": 20,
+        "delta": 0,
+        "verbose": true,
+        "batch_size": 256,
+        "dataset_ratio": 0.6,
+        "shuffle": false
+     }
+}
